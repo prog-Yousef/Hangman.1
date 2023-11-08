@@ -23,7 +23,21 @@ body {
     align-items: flex-end;
     padding: 60px 40px;
     border-radius: 10px;
+
 }
+
+svg{
+    width: 80%;
+    height: 80%;
+}
+
+.a2, .a3, .a4, .a5{
+display: none;
+
+}
+
+
+
 
 .hangman-box img {
     max-width: 270px;

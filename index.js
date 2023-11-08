@@ -29,8 +29,23 @@ const initGame = (button, clicked) => {
             }
         });
     } else {
-        wrongGuessCount++;
-    }
+        wrongGuessCount++; 
+
+        // SVG-koden som en template-sträng
+/* const svgCode = 
+;
+
+// Skapa ett div-element och lägg till SVG-koden i det
+const div = document.createElement('div');
+div.innerHTML = svgCode;
+
+// Lägg till div-elementet i DOM
+document.body.appendChild(div);
+ */
+
+    } if (wrongGuessCount > 5 ) {
+        return  alert('du förlorade');
+    } 
 
     guessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;
 }
@@ -67,3 +82,11 @@ document.addEventListener('keydown', function (event) {
 });
 
 RandomWord();
+
+if (wrongGuessCount = 0 ) {
+    var a2 = document.getElementById("body");
+  element.classList.remove("a2");
+
+} else {
+    
+}
