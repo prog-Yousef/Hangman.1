@@ -205,3 +205,8 @@ display: none;
 .virtual-key.active {
     background-color: #ffcc00;
 }
+
+.newGame {
+    width: 90px;
+    height: 60px;
+}

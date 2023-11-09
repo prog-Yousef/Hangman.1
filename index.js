@@ -30,25 +30,21 @@ const initGame = (button, clicked) => {
         });
     } else {
         wrongGuessCount++; 
+        updateHangman();
 
-        // SVG-koden som en template-sträng
-/* const svgCode = 
-;
-
-// Skapa ett div-element och lägg till SVG-koden i det
-const div = document.createElement('div');
-div.innerHTML = svgCode;
-
-// Lägg till div-elementet i DOM
-document.body.appendChild(div);
- */
 
     } if (wrongGuessCount > 5 ) {
-        return  alert('du förlorade');
-    } 
+        return  alert(`du förlorade\, rätta ordet var\: ${clickedWord} `);
+
+    }
+/* button.disabled = true; */
 
     guessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;
+    
+ /*    else (wrongGuessCount === ) */
 }
+
+
 
 // Skapar knappar för den virtuella tangentbordet
 const KeyboardDiv = document.querySelector('.keyboard');
@@ -83,10 +79,43 @@ document.addEventListener('keydown', function (event) {
 
 RandomWord();
 
-if (wrongGuessCount = 0 ) {
-    var a2 = document.getElementById("body");
-  element.classList.remove("a2");
 
-} else {
-    
+
+
+
+function updateHangman() {
+
+    let arm1Element = document.querySelector(".a1");
+    let arm2Element = document.querySelector(".a2");
+    let arm3Element = document.querySelector(".a3");
+    let arm4Element = document.querySelector(".a4");
+    let arm5Element = document.querySelector(".a5");
+
+
+
+    if (wrongGuessCount === 0) {
+        arm1Element.style.display = "block";
+    } 
+
+    else if (wrongGuessCount === 1) {
+        arm1Element.style.display = "block";
+        arm2Element.style.display = "block";
+    }  else if (wrongGuessCount === 2) {
+        arm1Element.style.display = "block";
+        arm2Element.style.display = "block";
+        arm3Element.style.display = "block";
+
+    } else if (wrongGuessCount === 3) {
+        arm1Element.style.display = "block";
+        arm2Element.style.display = "block";
+        arm3Element.style.display = "block";
+        arm4Element.style.display = "block";
+    } else if ( wrongGuessCount === 4) {
+        arm1Element.style.display = "block";
+        arm2Element.style.display = "block";
+        arm3Element.style.display = "block";
+        arm4Element.style.display = "block";
+        arm5Element.style.display = "block";
+
+    }
 }
