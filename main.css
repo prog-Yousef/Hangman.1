@@ -23,12 +23,14 @@ body {
     align-items: flex-end;
     padding: 60px 40px;
     border-radius: 10px;
+ 
 
 }
 
 svg{
     width: 80%;
     height: 80%;
+
 }
 
 .a2, .a3, .a4, .a5{
@@ -83,6 +85,7 @@ display: none;
     font-weight: 600;
 }
 
+
 .game-box .guesses-text b {
     color: #ff0000;
 }
@@ -120,6 +123,7 @@ display: none;
 :where(.game-modal, .keyboard) buttton:hover {
     background-color: #8286c9;
 }
+
 
 .game-modal {
     position: fixed;
@@ -207,6 +211,39 @@ display: none;
 }
 
 .newGame {
-    width: 90px;
+    width: 60px;
     height: 60px;
 }
+
+
+ .newGameBox{
+    flex-direction: row;
+    background-color: #b99f56;
+    width: 300px;
+    height: 200px;
+    border-style: dotted;
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    display: none;
+  }
+  
+  .gameText{
+    display: flex;
+    justify-content: center;
+  
+  }
+  .newGame{
+    display: flex;
+    width: 200px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+   
+  }
+
+ .newGameBox.show {
+
+    display: flex;
+  }
+

@@ -7,8 +7,21 @@ let wordList = ["apple", "banana", "car", "dog", "elephant",
 const wordDisplay = document.querySelector('.word-display');
 let clickedWord;
 let wrongGuessCount = 0;
+let rightLetter = [];
 const maxGuesses = 5;
 const guessesText = document.querySelector(".guesses-text b");
+const newGamebox = document.querySelector(".newGameBox");
+const newgameButton = document.querySelector(".newGame");
+
+const gameReset = () => {
+    rightLetter = [];
+    wrongGuessCount = 0;
+    wordDisplay.innerHTML = answer.split('').map(() => `<li class='letter'></li>`).join('');
+    KeyboardDiv = document.querySelectorAll('button').forEach(btn.disabled = false);
+    updateHangman() 
+    guessesText.innerText = `${ wrongGuessCount} / ${maxGuesses}`;
+    newGamebox.classList.remove("show");
+}
 
 // Slumpar ett ord
 const RandomWord = () => {
@@ -16,6 +29,13 @@ const RandomWord = () => {
     clickedWord = answer;
     console.log(answer);
     wordDisplay.innerHTML = answer.split('').map(() => `<li class='letter'></li>`).join('');
+ 
+}
+
+const endGame = (victoriousGame) => {
+    newGamebox.classList.add("show");
+  
+
 }
 
 // Initierar spelet när en knapp trycks
@@ -25,6 +45,7 @@ const initGame = (button, clicked) => {
     if (clickedWord.includes(clickedLetter)) {
         [...clickedWord].forEach((letter, index) => {
             if (letter === clickedLetter) {
+                rightLetter.push(letter);
                 wordDisplay.querySelectorAll("li")[index].innerText = letter;
             }
         });
@@ -33,15 +54,17 @@ const initGame = (button, clicked) => {
         updateHangman();
 
 
-    } if (wrongGuessCount > 5 ) {
-        return  alert(`du förlorade\, rätta ordet var\: ${clickedWord} `);
+  } if (wrongGuessCount > 5 ) {
+        return   newGamebox.classList.add("show");              /* alert(`du förlorade\, rätta ordet var\: ${clickedWord}` ); */
 
-    }
-/* button.disabled = true; */
+    }      
+       
 
-    guessesText.innerText = `${wrongGuessCount} / ${maxGuesses}`;
-    
- /*    else (wrongGuessCount === ) */
+button.disabled = true; 
+ 
+    guessesText.innerText = `${ wrongGuessCount} / ${maxGuesses}`;
+
+    if(rightLetter.length === clickedWord.length) endGame(true)
 }
 
 
@@ -79,7 +102,7 @@ document.addEventListener('keydown', function (event) {
 
 RandomWord();
 
-
+newgameButton.addEventListener("click",RandomWord);
 
 
 
@@ -117,5 +140,7 @@ function updateHangman() {
         arm4Element.style.display = "block";
         arm5Element.style.display = "block";
 
-    }
+    }    /* else if (wrongGuessCount > 4) {
+       alert ("you lose")
+    } */
 }
