@@ -14,13 +14,15 @@ const newGamebox = document.querySelector(".newGameBox");
 const newgameButton = document.querySelector(".newGame");
 
 const gameReset = () => {
-    rightLetter = [];
-    wrongGuessCount = 0;
-    wordDisplay.innerHTML = answer.split('').map(() => `<li class='letter'></li>`).join('');
-    KeyboardDiv = document.querySelectorAll('button').forEach(btn.disabled = false);
-    updateHangman() 
-    guessesText.innerText = `${ wrongGuessCount} / ${maxGuesses}`;
-    newGamebox.classList.remove("show");
+
+    location.reload(true);
+    /*  rightLetter = [];
+     wrongGuessCount = 0;
+     wordDisplay.innerHTML = answer.split('').map(() => `<li class='letter'></li>`).join('');
+     KeyboardDiv = document.querySelectorAll('button').forEach(btn.disabled = false);
+     updateHangman() 
+     guessesText.innerText = `${ wrongGuessCount} / ${maxGuesses}`;
+     newGamebox.classList.remove("show"); */
 }
 
 // Slumpar ett ord
@@ -29,13 +31,13 @@ const RandomWord = () => {
     clickedWord = answer;
     console.log(answer);
     wordDisplay.innerHTML = answer.split('').map(() => `<li class='letter'></li>`).join('');
- 
+
 }
+
+document.querySelector(".gameText");
 
 const endGame = (victoriousGame) => {
     newGamebox.classList.add("show");
-  
-
 }
 
 // Initierar spelet när en knapp trycks
@@ -50,21 +52,24 @@ const initGame = (button, clicked) => {
             }
         });
     } else {
-        wrongGuessCount++; 
+        guessesText.innerText = `${wrongGuessCount + 1} / ${maxGuesses}`;
+        wrongGuessCount++;
         updateHangman();
 
 
-  } if (wrongGuessCount > 5 ) {
-        return   newGamebox.classList.add("show");              /* alert(`du förlorade\, rätta ordet var\: ${clickedWord}` ); */
+    } if (wrongGuessCount > 4) {   
+         document.getElementById("gameText").innerText = (`du förlorade\, rätta ordet var\: ${clickedWord}`);
 
-    }      
-       
+        return newGamebox.classList.add("show");             
 
-button.disabled = true; 
- 
-    guessesText.innerText = `${ wrongGuessCount} / ${maxGuesses}`;
+    } else if (rightLetter.length === clickedWord.length) {
+        document.getElementById("gameText").innerText = (`du vann\, rätta ordet var\: ${clickedWord}`);
+ } 
 
-    if(rightLetter.length === clickedWord.length) endGame(true)
+
+    button.disabled = true;
+
+    if (rightLetter.length === clickedWord.length) endGame(true)
 }
 
 
@@ -102,45 +107,27 @@ document.addEventListener('keydown', function (event) {
 
 RandomWord();
 
-newgameButton.addEventListener("click",RandomWord);
+newgameButton.addEventListener("click", RandomWord);
+
 
 
 
 function updateHangman() {
-
     let arm1Element = document.querySelector(".a1");
     let arm2Element = document.querySelector(".a2");
     let arm3Element = document.querySelector(".a3");
     let arm4Element = document.querySelector(".a4");
     let arm5Element = document.querySelector(".a5");
 
-
-
     if (wrongGuessCount === 0) {
         arm1Element.style.display = "block";
-    } 
-
-    else if (wrongGuessCount === 1) {
-        arm1Element.style.display = "block";
+    } else if (wrongGuessCount === 1) {
         arm2Element.style.display = "block";
-    }  else if (wrongGuessCount === 2) {
-        arm1Element.style.display = "block";
-        arm2Element.style.display = "block";
+    } else if (wrongGuessCount === 2) {
         arm3Element.style.display = "block";
-
     } else if (wrongGuessCount === 3) {
-        arm1Element.style.display = "block";
-        arm2Element.style.display = "block";
-        arm3Element.style.display = "block";
         arm4Element.style.display = "block";
-    } else if ( wrongGuessCount === 4) {
-        arm1Element.style.display = "block";
-        arm2Element.style.display = "block";
-        arm3Element.style.display = "block";
-        arm4Element.style.display = "block";
+    } else if (wrongGuessCount === 4) {
         arm5Element.style.display = "block";
-
-    }    /* else if (wrongGuessCount > 4) {
-       alert ("you lose")
-    } */
+    }
 }
