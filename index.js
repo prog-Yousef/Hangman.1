@@ -94,6 +94,7 @@ const initGame = (button, clicked) => {
 
     } if (wrongGuessCount > 4) {
         document.getElementById("gameText").innerText = (`du förlorade\, rätta ordet var\: ${clickedWord}`);
+        document.getElementById("container").classList = "hide";
         let hangmanGif = document.createElement('img');
         hangmanGif.src = 'https://media.tenor.com/PtfqnCZuIXYAAAAC/kick-chair-hang-self.gif';
         
@@ -103,6 +104,7 @@ const initGame = (button, clicked) => {
         newGameBox.appendChild(hangmanGif);
         
         return newGamebox.classList.add("show");
+       
 
     } else if (rightLetter.length === clickedWord.length) {
         document.getElementById("gameText").innerText = (`du vann\, rätta ordet var\: ${clickedWord}`);
