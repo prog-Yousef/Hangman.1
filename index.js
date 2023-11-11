@@ -1,9 +1,11 @@
 // Lista med ord
 let wordList = ["apple", "banana", "car", "dog", "elephant",
-    "flower", "guitar", "house", "ice cream", "jacket",
+    "flower", "guitar", "house", "ice", "jacket",
     "kite", "lion", "mountain", "notebook", "ocean",
     "pencil", "quilt", "rabbit", "sun", "tree"];
 
+
+/* ***************************variabler ****************************************************/
 const wordDisplay = document.querySelector('.word-display');
 let clickedWord;
 let wrongGuessCount = 0;
@@ -12,20 +14,13 @@ const maxGuesses = 5;
 const guessesText = document.querySelector(".guesses-text b");
 const newGamebox = document.querySelector(".newGameBox");
 const newgameButton = document.querySelector(".newGame");
-
 const gameReset = () => {
-
     location.reload(true);
-    /*  rightLetter = [];
-     wrongGuessCount = 0;
-     wordDisplay.innerHTML = answer.split('').map(() => `<li class='letter'></li>`).join('');
-     KeyboardDiv = document.querySelectorAll('button').forEach(btn.disabled = false);
-     updateHangman() 
-     guessesText.innerText = `${ wrongGuessCount} / ${maxGuesses}`;
-     newGamebox.classList.remove("show"); */
+
 }
 
-// Slumpar ett ord
+
+/*********************Slumpar Random Ord ******************************************************/
 const RandomWord = () => {
     answer = wordList[Math.floor(Math.random() * wordList.length)];
     clickedWord = answer;
@@ -34,47 +29,10 @@ const RandomWord = () => {
 
 }
 
-document.querySelector(".gameText");
-
-const endGame = (victoriousGame) => {
-    newGamebox.classList.add("show");
-}
-
-// Initierar spelet när en knapp trycks
-const initGame = (button, clicked) => {
-    const clickedLetter = clicked.toLowerCase();
-
-    if (clickedWord.includes(clickedLetter)) {
-        [...clickedWord].forEach((letter, index) => {
-            if (letter === clickedLetter) {
-                rightLetter.push(letter);
-                wordDisplay.querySelectorAll("li")[index].innerText = letter;
-            }
-        });
-    } else {
-        guessesText.innerText = `${wrongGuessCount + 1} / ${maxGuesses}`;
-        wrongGuessCount++;
-        updateHangman();
 
 
-    } if (wrongGuessCount > 4) {   
-         document.getElementById("gameText").innerText = (`du förlorade\, rätta ordet var\: ${clickedWord}`);
+/* ********************Skapar knappar för den virtuella tangentbordet*****************************/
 
-        return newGamebox.classList.add("show");             
-
-    } else if (rightLetter.length === clickedWord.length) {
-        document.getElementById("gameText").innerText = (`du vann\, rätta ordet var\: ${clickedWord}`);
- } 
-
-
-    button.disabled = true;
-
-    if (rightLetter.length === clickedWord.length) endGame(true)
-}
-
-
-
-// Skapar knappar för den virtuella tangentbordet
 const KeyboardDiv = document.querySelector('.keyboard');
 
 for (let i = 97; i <= 122; i++) {
@@ -110,8 +68,54 @@ RandomWord();
 newgameButton.addEventListener("click", RandomWord);
 
 
+/* ****************Initierar spelet när en knapp trycks****************************************** */
+
+document.querySelector(".gameText");
+
+const endGame = (victoriousGame) => {
+    newGamebox.classList.add("show");
+}
+
+const initGame = (button, clicked) => {
+    const clickedLetter = clicked.toLowerCase();
+
+    if (clickedWord.includes(clickedLetter)) {
+        [...clickedWord].forEach((letter, index) => {
+            if (letter === clickedLetter) {
+                rightLetter.push(letter);
+                wordDisplay.querySelectorAll("li")[index].innerText = letter;
+            }
+        });
+    } else {
+        guessesText.innerText = `${wrongGuessCount + 1} / ${maxGuesses}`;
+        wrongGuessCount++;
+        updateHangman();
 
 
+    } if (wrongGuessCount > 4) {
+        document.getElementById("gameText").innerText = (`du förlorade\, rätta ordet var\: ${clickedWord}`);
+        let hangmanGif = document.createElement('img');
+        hangmanGif.src = 'https://media.tenor.com/PtfqnCZuIXYAAAAC/kick-chair-hang-self.gif';
+        
+        
+        let newGameBox = document.querySelector('.newGameBox');
+        
+        newGameBox.appendChild(hangmanGif);
+        
+        return newGamebox.classList.add("show");
+
+    } else if (rightLetter.length === clickedWord.length) {
+        document.getElementById("gameText").innerText = (`du vann\, rätta ordet var\: ${clickedWord}`);
+    }
+
+    button.disabled = true;
+
+    if (rightLetter.length === clickedWord.length) endGame(true)
+}
+
+
+
+/* ******************************** Renderar Hangmang.svg***************************************** */
 function updateHangman() {
     let arm1Element = document.querySelector(".a1");
     let arm2Element = document.querySelector(".a2");
