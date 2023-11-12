@@ -96,14 +96,17 @@ const initGame = (button, clicked) => {
         updateHangman();
 
 
-    } if (wrongGuessCount > 5) {
+} if (wrongGuessCount > 4) {
+        setTimeout(() => {
+            document.getElementById("container").classList = "hide";
+        }, "900");
+        
+        setTimeout(() => {
         document.getElementById("gameText").innerText = (`Du förlorade\, rätta ordet var\: ${clickedWord}`);
-        document.getElementById("container").classList = "hide";
         document.getElementById("theGif").classList = "show";
         document.getElementById("newGame").classList = "showGame";
-
         return newGamebox.classList.add("show");
-
+          }, "1000");
 
     } else if (rightLetter.length === clickedWord.length) {
         document.getElementById("gameText").innerText = (`Du vann\, rätta ordet var\: ${clickedWord}`);
