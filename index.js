@@ -63,20 +63,23 @@ document.addEventListener('keydown', function (event) {
     });
 });
 
+
+/************Renderar ett Random ord**************** */
 RandomWord();
 
 newgameButton.addEventListener("click", RandomWord);
 
 
-/* ****************Initierar spelet när en knapp trycks****************************************** */
+
+/* **********************Renderar vinst eller förlust Text************************************ */
 
 document.querySelector(".gameText");
 
-const endGame = (victoriousGame) => {
+const endGame = () => {
     newGamebox.classList.add("show");
 
 }
-
+/* **************Hela spelets funktion som kollar ordet är fel eller rätt och renderar utifrån det******** */
 const initGame = (button, clicked) => {
     const clickedLetter = clicked.toLowerCase();
 
@@ -93,18 +96,14 @@ const initGame = (button, clicked) => {
         updateHangman();
 
 
-    } if (wrongGuessCount == 5) {
+    } if (wrongGuessCount > 5) {
         document.getElementById("gameText").innerText = (`Du förlorade\, rätta ordet var\: ${clickedWord}`);
         document.getElementById("container").classList = "hide";
         document.getElementById("theGif").classList = "show";
         document.getElementById("newGame").classList = "showGame";
 
-        
-        let newGameBox = document.querySelector('.newGameBox');
-        
-
         return newGamebox.classList.add("show");
-       
+
 
     } else if (rightLetter.length === clickedWord.length) {
         document.getElementById("gameText").innerText = (`Du vann\, rätta ordet var\: ${clickedWord}`);
@@ -118,7 +117,7 @@ const initGame = (button, clicked) => {
     }
 
     button.disabled = true;
- if (rightLetter.length === clickedWord.length) endGame(true) 
+    if (rightLetter.length === clickedWord.length) endGame(true)
 
 }
 
