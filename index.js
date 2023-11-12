@@ -80,6 +80,8 @@ const endGame = () => {
 
 }
 /* **************Hela spelets funktion som kollar ordet är fel eller rätt och renderar utifrån det******** */
+
+
 const initGame = (button, clicked) => {
     const clickedLetter = clicked.toLowerCase();
 
@@ -96,13 +98,18 @@ const initGame = (button, clicked) => {
         updateHangman();
 
 
-    } if (wrongGuessCount > 5) {
-        document.getElementById("gameText").innerText = (`Du förlorade\, rätta ordet var\: ${clickedWord}`);
-        document.getElementById("container").classList = "hide";
-        document.getElementById("theGif").classList = "show";
-        document.getElementById("newGame").classList = "showGame";
+    } if (wrongGuessCount > 4) {
+        setTimeout(() => {
+            document.getElementById("container").classList = "hide";
+        }, "900");
 
-        return newGamebox.classList.add("show");
+        setTimeout(() => {
+            document.getElementById("gameText").innerText = (`Du förlorade\, rätta ordet var\: ${clickedWord}`);
+            document.getElementById("theGif").classList = "show";
+            document.getElementById("newGame").classList = "showGame";
+            return newGamebox.classList.add("show");
+        }, "1000");
+
 
 
     } else if (rightLetter.length === clickedWord.length) {
@@ -112,17 +119,12 @@ const initGame = (button, clicked) => {
         document.getElementById("newGame").classList = "showGame";
         document.getElementById("Victory-Gif").classList = "show";
 
-
-
     }
 
     button.disabled = true;
     if (rightLetter.length === clickedWord.length) endGame(true)
 
 }
-
-
-
 /* ******************************** Renderar Hangmang.svg***************************************** */
 function updateHangman() {
     let arm1Element = document.querySelector(".a1");
@@ -143,3 +145,5 @@ function updateHangman() {
         arm5Element.style.display = "block";
     }
 }
+
+
