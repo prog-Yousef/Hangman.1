@@ -74,6 +74,7 @@ document.querySelector(".gameText");
 
 const endGame = (victoriousGame) => {
     newGamebox.classList.add("show");
+
 }
 
 const initGame = (button, clicked) => {
@@ -92,27 +93,33 @@ const initGame = (button, clicked) => {
         updateHangman();
 
 
-    } if (wrongGuessCount > 4) {
-        document.getElementById("gameText").innerText = (`du förlorade\, rätta ordet var\: ${clickedWord}`);
+    } if (wrongGuessCount == 5) {
+        document.getElementById("gameText").innerText = (`Du förlorade\, rätta ordet var\: ${clickedWord}`);
         document.getElementById("container").classList = "hide";
-        let hangmanGif = document.createElement('img');
-        hangmanGif.src = 'https://media.tenor.com/PtfqnCZuIXYAAAAC/kick-chair-hang-self.gif';
-        
+        document.getElementById("theGif").classList = "show";
+        document.getElementById("newGame").classList = "showGame";
+
         
         let newGameBox = document.querySelector('.newGameBox');
         
-        newGameBox.appendChild(hangmanGif);
-        
+
         return newGamebox.classList.add("show");
        
 
     } else if (rightLetter.length === clickedWord.length) {
-        document.getElementById("gameText").innerText = (`du vann\, rätta ordet var\: ${clickedWord}`);
+        document.getElementById("gameText").innerText = (`Du vann\, rätta ordet var\: ${clickedWord}`);
+        document.getElementById("theGif").classList = "hide";
+        document.getElementById("container").classList = "hide";
+        document.getElementById("newGame").classList = "showGame";
+        document.getElementById("Victory-Gif").classList = "show";
+
+
+
     }
 
     button.disabled = true;
+ if (rightLetter.length === clickedWord.length) endGame(true) 
 
-    if (rightLetter.length === clickedWord.length) endGame(true)
 }
 
 
